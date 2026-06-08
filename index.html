@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Help YoungStunnaRunna</title>
+  <!-- SF Pro / system font stack - clean apple style -->
+  <link rel="icon" type="image/png" href="images/help.png">
+  <style>
+    /* SF Pro + premium system fonts */
+    @font-face {
+      font-family: 'SF Pro Display';
+      src: local('SF Pro Display'), local('SFProDisplay'), local('SF Pro Text');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SF Pro Text';
+      src: local('SF Pro Text'), local('SFProText');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 30%, #f5f5f7 0%, #f0f0f2 100%);
+      font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Inter', system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1c1c1e;
+      line-height: 1.4;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* ----- TITLE SECTION (perfectly centered, scribble style ONLY for the correction aesthetic, but SF Pro for everything else + hand-drawn elements preserved as per request but fonts overall SF Pro, title keeps hand-corrected look but without forcing handwritten fonts globally) */
+    .scribble-hero {
+      text-align: center;
+      margin: 1.5rem 0 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .title-group {
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Base title uses clean SF Pro Display for readability, but matcha correction uses script style */
+    .title-base {
+      font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1c1c1e;
+      display: inline-block;
+      position: relative;
+      line-height: 1.2;
+    }
+
+    .intro-text {
+      font-family: -apple-system, 'SF Pro Display', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #1c1c1e;
+      margin-right: 0.25rem;
+    }
+
+    .coffee-correction {
+      display: inline-block;
+      position: relative;
+      margin: 0 0.2rem;
+    }
+
+    .coffee-word {
+      font-family: -apple-system, 'SF Pro Display', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #2c2c2e;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* hand-drawn red sketch strike-through (preserved for the correction effect) */
+    .sketch-strike {
+      position: absolute;
+      top: 50%;
+      left: -6%;
+      width: 112%;
+      height: 0.28rem;
+      background: #e34234;
+      transform: rotate(-4deg) translateY(-50%);
+      border-radius: 20px;
+      box-shadow: 0 0 0 1px rgba(227, 66, 52, 0.25);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .sketch-strike::before {
+      content: '';
+      position: absolute;
+      top: 0.1rem;
+      left: 3%;
+      width: 94%;
+      height: 0.18rem;
+      background: #c72a1f;
+      opacity: 0.55;
+      transform: rotate(2deg);
+      border-radius: 12px;
+    }
+
+    /* Matcha correction above coffee - playful handstyle but subtle */
+    .matcha-correction {
+      position: absolute;
+      top: -1.4rem;
+      left: 65%;
+      transform: translateX(-50%) rotate(-2deg);
+      white-space: nowrap;
+      z-index: 5;
+      font-family: 'Kalam', 'Snell Roundhand', 'Apple Chancery', cursive;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #7CB342;
+      background: #F5F5F7;
+      padding: 0 0.3rem;
+      border-radius: 90px;
+      letter-spacing: -0.3px;
+      backdrop-filter: blur(2px);
+    }
+
+    .matcha-check {
+      font-size: 1.6rem;
+      display: inline-block;
+      margin-left: 0.15rem;
+    }
+
+    /* description: no border, just clean text */
+    .hero-description {
+      max-width: 680px;
+      margin: 1.8rem auto 0;
+      font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+      font-size: 1.18rem;
+      font-weight: 450;
+      color: #3a3a3e;
+      background: transparent;
+      padding: 0.2rem 0.8rem;
+      text-align: center;
+      line-height: 1.45;
+      letter-spacing: -0.2px;
+    }
+
+    /* section titles (clean SF Pro, no diamonds) */
+    .section-title {
+      font-family: -apple-system, 'SF Pro Display', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 590;
+      margin: 2.2rem 0 1.5rem;
+      text-align: center;
+      color: #1c1c1e;
+      display: inline-block;
+      width: auto;
+      left: 50%;
+      position: relative;
+      transform: translateX(-50%);
+      padding: 0 0.2rem 0.4rem;
+      letter-spacing: -0.3px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* cards grid centered — 2 per row on desktop */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 320px));
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.8rem;
+    }
+
+    /* Glass card */
+    .qr-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 1.6rem 1.2rem 1.8rem;
+      transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+      box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qr-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.12);
+      border-color: rgba(200, 200, 210, 0.4);
+    }
+
+    /* FIX: top accent line properly attached to the top edge of card */
+    .qr-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-color);
+      opacity: 0.85;
+      border-radius: 32px 32px 0 0;
+      transition: opacity 0.2s;
+      z-index: 1;
+    }
+
+    .qr-card:hover::before {
+      opacity: 1;
+    }
+
+    /* round logo holder - image placeholder */
+    .logo-wrapper {
+      width: 80px;
+      height: 80px;
+      background: #fefefe;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s;
+      overflow: hidden;
+    }
+
+    .brand-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #f5f5f7;
+    }
+
+    .brand-logo-img[src=""], .brand-logo-img:not([src]) {
+      background: #f2f2f5;
+      background-image: radial-gradient(circle at 30% 35%, #e2e2e8 1.2px, transparent 1.2px);
+      background-size: 16px 16px;
+    }
+
+    .institution-name {
+      font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+      font-size: 1.55rem;
+      font-weight: 590;
+      letter-spacing: -0.3px;
+      margin-top: 0.2rem;
+      margin-bottom: 0.9rem;
+      color: #1c1c1e;
+    }
+
+    /* QR image placeholder */
+    .qr-placeholder {
+      margin: 0.3rem 0;
+      background: #ffffff;
+      padding: 0.7rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .qr-image {
+      width: 170px;
+      height: 170px;
+      display: block;
+      background: #fbfbfd;
+      border-radius: 20px;
+      object-fit: contain;
+    }
+
+    .qr-image[src=""], .qr-image:not([src]) {
+      background: #f5f5f7;
+      background-image: repeating-linear-gradient(45deg, #e8e8ed 0px, #e8e8ed 2px, #f5f5f7 2px, #f5f5f7 12px);
+      border-radius: 20px;
+    }
+
+    /* footer (clean, no diamonds, just friendly) */
+    .footer-handmade {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding: 1.5rem 1rem 1.2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      background: transparent;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30px;
+      font-size: 1.8rem;
+      color: #2c2c2e;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      border: 0.5px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .social-btn i {
+      transition: transform 0.2s;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      background: #ffffff;
+      color: #ff5151;
+      border-color: rgba(0, 122, 255, 0.2);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .copyright-scribble {
+      font-family: -apple-system, 'SF Pro Text', monospace;
+      font-size: 0.85rem;
+      font-weight: 450;
+      color: #8e8e93;
+      letter-spacing: -0.2px;
+      background: transparent;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+    }
+
+    .helper-note {
+      font-family: -apple-system, 'SF Pro Text', sans-serif;
+      font-size: 0.7rem;
+      color: #a1a1a8;
+      margin-top: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* color accents */
+    .card-bpi { --accent-color: #B11116; }
+    .card-rcbc { --accent-color: #669ECC; }
+    .card-gcash { --accent-color: #0067E4; }
+    .card-gotyme { --accent-color: #00F5FA; }
+    .card-maribank { --accent-color: #EE4D2D; }
+    .card-maya { --accent-color: #00B464; }
+
+    /* Responsive improvements */
+    @media (max-width: 760px) {
+      .container {
+        padding: 1.2rem 1rem 2rem;
+      }
+      .title-base, .coffee-word {
+        font-size: 2.5rem;
+      }
+      .intro-text {
+        font-size: 2.3rem;
+      }
+      .coffee-word {
+        font-size: 2.7rem;
+      }
+      .matcha-correction {
+        font-size: 1.4rem;
+        top: -0.85rem;
+      }
+      .matcha-check {
+        font-size: 1.2rem;
+      }
+      .hero-description {
+        font-size: 1rem;
+        padding: 0 0.2rem;
+      }
+      .section-title {
+        font-size: 1.65rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.3rem;
+      }
+      .qr-image {
+        width: 140px;
+        height: 140px;
+      }
+      .logo-wrapper {
+        width: 70px;
+        height: 70px;
+      }
+      .institution-name {
+        font-size: 1.4rem;
+      }
+      .social-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .title-base, .coffee-word {
+        font-size: 2rem;
+      }
+      .intro-text {
+        font-size: 1.7rem;
+      }
+      .coffee-word {
+        font-size: 2rem;
+      }
+      .matcha-correction {
+        font-size: 1.1rem;
+        top: -0.7rem;
+        padding: 0 0.2rem;
+      }
+      .matcha-check {
+        font-size: 1rem;
+      }
+      .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+      .qr-image {
+        width: 125px;
+        height: 125px;
+      }
+      .logo-wrapper {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  </style>
+  <!-- Font awesome for social icons (clean) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Load Kalam for the Matcha script only (handwritten correction) but rest SF Pro, matches requirement -->
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <!-- HEADER: centered, title correction (coffee crossed, matcha above) -->
+  <div class="scribble-hero">
+    <div class="title-group">
+      <span class="title-base">
+        <span class="intro-text">buy me a</span>
+        <span class="coffee-correction">
+          <span class="coffee-word">coffee</span>
+          <span class="sketch-strike"></span>
+          <span class="matcha-correction">
+            matcha <span class="matcha-check"><3</span>
+          </span>
+        </span>
+      </span>
+    </div>
+    <div class="hero-description">
+      POV: You're helping a running content creator wannabe survive in this 
+      economy. Buy me matcha, send a donation, so I can keep posting unnecessary
+      running content that gets 5 daily report and unfollows.
+    </div>
+  </div>
+
+  <!-- Banks Section (alphabetical: BPI, RCBC) -->
+  <div class="section">
+    <h2 class="section-title">Banks</h2>
+    <div class="cards-grid">
+      <!-- BPI Card -->
+      <div class="qr-card card-bpi">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/hph5YBvc0ZunCaPfZzI1HS0u3OstBmmPF0_OnqaChEih7O1wrsi-TlRg33AEt3FTero=w480-h960-rw" alt="BPI logo">
+        </div>
+        <div class="institution-name">BPI</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-bpi.jpeg" alt="BPI QR placeholder">
+        </div>
+      </div>
+      <!-- RCBC Card -->
+      <div class="qr-card card-rcbc">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/LMFlepSXuzVky-bBwLb1ECeq-vZUI-mPMiFJKlNVgZqxEKpiEXRHiWpngmTayG4L2JDK=w480-h960-rw" alt="RCBC logo">
+        </div>
+        <div class="institution-name">RCBC</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-rcbc.jpeg" alt="RCBC QR placeholder">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-Wallets / Digital Banks (alphabetical: GCash, GoTyme, MariBank, Maya) -->
+  <div class="section">
+    <h2 class="section-title">E-Wallets / Digital Banks</h2>
+    <div class="cards-grid">
+      <!-- GCash -->
+      <div class="qr-card card-gcash">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/zHWdvutw3clyMpCuvOBcxg_CwKtA0ANzk3a51nbsI715Ucj9cyj7ifI_35LAPr8JY-zo1QerhSe0QzeBADdvXYc=w480-h960-rw" alt="GCash logo">
+        </div>
+        <div class="institution-name">GCash</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-gcash.jpeg" alt="GCash QR">
+        </div>
+      </div>
+      <!-- GoTyme Bank -->
+      <div class="qr-card card-gotyme">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/GiLjujGyms4EnNst9_6vv2RrTsaQRiti6pnM4ph5QekhydI0qh6wLDkk94pLqoGUXmuEFaJXzDWDM7WQCnDx=w480-h960-rw" alt="GoTyme Bank logo">
+        </div>
+        <div class="institution-name">GoTyme Bank</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-gotyme.jpeg" alt="GoTyme QR">
+        </div>
+      </div>
+      <!-- MariBank -->
+      <div class="qr-card card-maribank">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/HB9J7cgdP_NnezblcswH-JMAuilEMnwqS5IHkxKxGw7oBxS6g_N7IYIHqLiHvi6D_whmu-qNy_JPyTdNQfXbVA=w480-h960-rw" alt="MariBank logo">
+        </div>
+        <div class="institution-name">MariBank</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-maribank.jpeg" alt="MariBank QR">
+        </div>
+      </div>
+      <!-- Maya Bank -->
+      <div class="qr-card card-maya">
+        <div class="logo-wrapper">
+          <img class="brand-logo-img" src="https://play-lh.googleusercontent.com/fdQjxsIO8BTLaw796rQPZtLEnGEV8OJZJBJvl8dFfZLZcGf613W93z7y9dFAdDhvfqw=s96-rw" alt="Maya Bank logo">
+        </div>
+        <div class="institution-name">Maya Bank</div>
+        <div class="qr-placeholder">
+          <img class="qr-image" src="images/qr-maya.jpeg" alt="Maya Bank QR">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER: social links + copyright -->
+  <div class="footer-handmade">
+    <div class="social-links">
+      <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+    <div class="copyright-scribble">
+      @ YoungStunnaRunna
+    </div>
+    <div class="helper-note">
+       Like & Subscribe (or maybe not)
+    </div>
+  </div>
+</div>
+
+<!-- set social links (examples) and style ensures top accent lines align perfectly -->
+<script>
+  (function() {
+    // Update social links with your actual profiles
+    const socials = document.querySelectorAll('.social-btn');
+    if (socials.length >= 3) {
+      socials[0].href = 'https://youtube.com/@YoungStunnaRunna';
+      socials[1].href = 'https://instagram.com/youngstunnarunna';
+      socials[2].href = 'https://tiktok.com/@youngstunnarunna';
+    }
+    // ensure no diamond or stray characters
+    console.log('ready — accents fixed, fonts SF Pro, description border removed');
+  })();
+</script>
+</body>
+</html>
